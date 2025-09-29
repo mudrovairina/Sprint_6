@@ -22,3 +22,14 @@ class MainPageLocators:
     FAQ_ANSWER_6 = (By.XPATH, ".//div[@id='accordion__panel-5']/p")
     FAQ_ANSWER_7 = (By.XPATH, ".//div[@id='accordion__panel-6']/p")
     FAQ_ANSWER_8 = (By.XPATH, ".//div[@id='accordion__panel-7']/p")
+
+    # Верхняя кнопка "Заказать"
+    ORDER_BUTTON_TOP = (
+        By.XPATH,
+        './/div[contains(@class, "Header_Nav")]/button[text()="Заказать"]'
+    )
+    # Нижняя кнопка "Заказать"
+    ORDER_BUTTON_BOTTOM = (
+        By.XPATH,
+        './/div[contains(@class, "Home_FinishButton")]/button[text()="Заказать"]'
+    )

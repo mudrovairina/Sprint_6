@@ -1,10 +1,11 @@
-import pytest
 import allure
-from locators.base_page_locators import BasePageLocators
+import pytest
+
 from locators.order_page_locators import OrderPageLocators
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 from urls import MAIN_PAGE_URL
+
 
 @allure.suite("Заказ самоката")
 @allure.sub_suite("Позитивные сценарии")
@@ -59,28 +60,15 @@ class TestOrderPage:
         main_page = MainPage(driver)
         order_page = OrderPage(driver)
 
-        with allure.step("Открываем главную страницу"):
-            main_page.open(MAIN_PAGE_URL)
+        main_page.open(MAIN_PAGE_URL)
+        getattr(main_page, click_method)()
+        order_page.fill_order_form(**order_data["user"])
+        order_page.click(OrderPageLocators.NEXT_BUTTON)
+        order_page.fill_rent_form(**order_data["rent"])
+        order_page.click(OrderPageLocators.ORDER_BUTTON_BOTTOM)
+        order_page.click(OrderPageLocators.ORDER_MODAL_YES_BUTTON)
 
-        with allure.step("Выбираем точку входа"):
-            getattr(main_page, click_method)()
-
-        with allure.step(
-                "Заполняем форму 'Для кого самокат' и нажимаем 'Далее'"
-        ):
-            order_page.fill_order_form(**order_data["user"])
-            order_page.click(OrderPageLocators.NEXT_BUTTON)
-
-        with allure.step(
-                "Заполняем форму 'Про аренду' и нажимаем 'Заказать'"
-        ):
-            order_page.fill_rent_form(**order_data["rent"])
-            order_page.click(BasePageLocators.ORDER_BUTTON_BOTTOM)
-
-        with allure.step("Подтверждаем заказ"):
-            order_page.click(OrderPageLocators.ORDER_MODAL_YES_BUTTON)
-
-        with allure.step("Проверка успешного создания заказа"):
+        with allure.step("Проверяем успешное создание заказа"):
             header = order_page.find(OrderPageLocators.ORDER_MODAL_HEADER).text
             assert "Заказ оформлен" in header, (
                 f"Ожидали сообщение 'Заказ оформлен', но получили '{header}'"

@@ -105,17 +105,12 @@ class TestMainPageFAQ:
     def test_faq(self, driver, question, answer, expected_answer_key):
         main_page = MainPage(driver)
 
-        with allure.step(f"Открываем главную страницу {MAIN_PAGE_URL}"):
-            main_page.open(MAIN_PAGE_URL)
-
-        with allure.step("Открываем вопрос и получаем ответ"):
-            actual_text = main_page.open_question_and_get_answer(
-                question, answer
-            )
+        main_page.open(MAIN_PAGE_URL)
+        actual_text = main_page.open_question_and_get_answer(question, answer)
 
         with allure.step("Сравниваем полученный ответ с ожидаемым"):
             expected_text = self.EXPECTED_ANSWER_TEXT[expected_answer_key]
             assert actual_text == expected_text, (
-                f"[FAQ] Для вопроса '{question}' ожидали ответ: "
-                f"'{expected_text}', но получили: '{actual_text}'"
+                f"[FAQ] Для вопроса '{question}' ожидали '{expected_text}', "
+                f"но получили '{actual_text}'"
             )

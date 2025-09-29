@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from locators.order_page_locators import OrderPageLocators
@@ -19,6 +20,7 @@ class OrderPage(BasePage):
         "grey": OrderPageLocators.SCOOTER_COLOR_GREY
     }
 
+    @allure.step("Заполняем форму 'Для кого самокат'")
     def fill_order_form(
             self,
             first_name,
@@ -27,15 +29,14 @@ class OrderPage(BasePage):
             metro_station,
             phone
     ):
-        """Заполняет форму 'Для кого самокат'"""
         self.fill(OrderPageLocators.NAME_INPUT, first_name)
         self.fill(OrderPageLocators.LAST_NAME_INPUT, last_name)
         self.fill(OrderPageLocators.ADDRESS_INPUT, address)
         self.fill(OrderPageLocators.PHONE_INPUT, phone)
         self._choose_metro_station(metro_station)
 
+    @allure.step("Заполняем форму 'Про аренду'")
     def fill_rent_form(self, date, rental_period, comment=None, color=None):
-        """Заполняет форму 'Про аренду'"""
         self.fill(OrderPageLocators.DATE_INPUT, date)
         self.click(OrderPageLocators.DROPDOWN_ARROW)
         self.click(self.RENTAL_PERIODS[rental_period])
@@ -59,11 +60,12 @@ class OrderPage(BasePage):
         color = color.lower()
         self.click(self.COLORS[color])
 
-    # Логотипы
+    @allure.step("Кликаем на логотип Самоката")
     def click_scooter_logo(self):
         """Кликает на логотип Самоката"""
         self.click(OrderPageLocators.SCOOTER_LOGO)
 
+    @allure.step("Кликаем на логотип Яндекса")
     def click_yandex_logo(self):
         """Кликает на логотип Яндекса"""
         self.click(OrderPageLocators.YANDEX_LOGO)

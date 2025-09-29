@@ -33,6 +33,12 @@ class OrderPageLocators:
         ".//input[@placeholder='Комментарий для курьера']"
     )
 
+    # Локатор кнопки "Заказать"на странице заказа
+    ORDER_BUTTON_BOTTOM = (
+        By.XPATH,
+        './/div[contains(@class, "Order_Buttons")]//button[text()="Заказать"]'
+    )
+
     # Локатор кнопки 'Да' в форме 'Хотите оформить заказ'
     ORDER_MODAL_YES_BUTTON = (By.XPATH, ".//button[text()='Да']")
 
