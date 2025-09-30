@@ -29,7 +29,6 @@
 ```
 Sprint_6/
 ├── locators/               # Локаторы
-│   ├── base_page_locators.py
 │   ├── main_page_locators.py
 │   └── order_page_locators.py
 │
@@ -76,6 +75,10 @@ Sprint_6/
     ```bash
     pytest -v
 
-3. Открой Allure-отчёт:
+3. Собери результаты для Allure:
+    ```bash
+    pytest tests --alluredir=allure_results
+
+4. Открой Allure-отчёт в браузере:
     ```bash
     allure serve allure-results
