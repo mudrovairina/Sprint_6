@@ -29,7 +29,6 @@
 ```
 Sprint_6/
 ├── locators/               # Локаторы
-│   ├── base_page_locators.py
 │   ├── main_page_locators.py
 │   └── order_page_locators.py
 │
